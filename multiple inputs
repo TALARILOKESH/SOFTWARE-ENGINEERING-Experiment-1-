@@ -1,0 +1,84 @@
+import os
+def load_appointments(file_path):
+    """Load multiple appointments from a file."""
+    appointments = []
+    try:
+        with open(file_path, "r") as file:
+            next(file)  # Skip the header line
+            for line in file:
+                parts = line.strip().split("\t")
+                if len(parts) == 4:  # Ensure we have the right number of columns
+                    _, patient_name, doctor_name, time = parts
+                    appointments.append({"patient_name": patient_name, "doctor_name": doctor_name, "time": time})
+    except FileNotFoundError:
+        print(f"File not found at path: {file_path}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    return appointments
+
+def save_appointments(file_path, appointments):
+    """Save all appointments to a file."""
+    with open(file_path, "w") as file:
+        file.write("S.No\tPatient Name\tDoctor Name\tTime\n")  # Write header
+        for i, appointment in enumerate(appointments, 1):
+            file.write(f"{i}\t{appointment['patient_name']}\t{appointment['doctor_name']}\t{appointment['time']}\n")
+def display_appointments(appointments):
+    """Display all the appointments."""
+    if not appointments:
+        print("No appointments available.")
+    else:
+        print("\nAppointments List:")
+        for i, appointment in enumerate(appointments, 1):
+            print(f"{i}. Patient: {appointment['patient_name']} - Doctor: {appointment['doctor_name']} - Time: {appointment['time']}")
+def add_appointment(appointments):
+    """Add multiple appointments to the list."""
+    while True:
+        print("\nEnter appointment details:")
+        patient_name = input("Enter patient's name: ")
+        doctor_name = input("Enter doctor's name: ")
+        time = input("Enter appointment time ")
+        new_appointment = {
+            "patient_name": patient_name,
+            "doctor_name": doctor_name,
+            "time": time
+        }
+        appointments.append(new_appointment)
+        print("Appointment added successfully!")
+
+        # Ask user if they want to add another appointment
+        add_more = input("Do you want to add another appointment? (yes/no): ").strip().lower()
+        if add_more != "yes":
+            break
+
+def main():
+    file_path = r"C:\Users\lokes\Downloads\SNime.txt"  # Update this to the correct file path
+
+    # Check if file exists; create if it doesn't
+    if not os.path.exists(file_path):
+        print("File does not exist. Creating a new file.")
+        with open(file_path, "w") as file:
+            file.write("S.No\tPatient Name\tDoctor Name\tTime\n")
+
+    # Load existing appointments from the file
+    appointments = load_appointments(file_path)
+
+    while True:
+        print("\nMenu:")
+        print("1. View Appointments")
+        print("2. Add Appointment")
+        print("3. Save Appointments and Exit")
+        choice = input("Enter your choice (1/2/3): ")
+
+        if choice == "1":
+            display_appointments(appointments)
+        elif choice == "2":
+            add_appointment(appointments)
+        elif choice == "3":
+            save_appointments(file_path, appointments)
+            print("Appointments saved successfully!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
