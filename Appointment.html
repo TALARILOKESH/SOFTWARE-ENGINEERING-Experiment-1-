@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .appointment-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .appointment-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .appointment-form input, .appointment-form select, .appointment-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .appointment-form button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .appointment-form button:hover {
+            background-color: #45a049;
+        }
+        .alert {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            color: white;
+            background-color: #4CAF50; /* Green color for success */
+            display: none;
+        }
+        .alert-error {
+            background-color: #f44336; /* Red color for error */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Book an Appointment</h1>
+
+    <div class="appointment-form">
+        <!-- Success Alert -->
+        <div id="success-alert" class="alert">
+            <strong>Success!</strong> Your appointment has been successfully booked.
+        </div>
+
+        <!-- Error Alert -->
+        <div id="error-alert" class="alert alert-error">
+            <strong>Error!</strong> Please fill in all required fields.
+        </div>
+
+        <form id="appointment-form">
+            <!-- Name Field -->
+            <label for="patient-name">Your Name</label>
+            <input type="text" id="patient-name" name="patient-name" required>
+            <label for="patient-email">Email Address</label>
+            <input type="email" id="patient-email" name="patient-email" required>
+            <label for="patient-phone">Phone Number</label>
+            <input type="text" id="patient-phone" name="patient-phone" required>
+            <label for="doctor">Select a Doctor</label>
+            <select id="doctor" name="doctor" required>
+                <option value="raju">Dr. Raju - Cardiology</option>
+                <option value="lokesh">Dr. Lokesh - Orthopedic Surgery</option>
+                <option value="harshitha">Dr. Harshitha - Obstetrics and Gynecology</option>
+                <option value="nayum">Dr. Nayum - Pediatrics</option>
+            </select>
+            <label for="service">Select Service</label>
+            <select id="service" name="service" required>
+                <option value="general-checkup">General Checkup</option>
+                <option value="specialist-consultation">Specialist Consultation</option>
+                <option value="lab-services">Laboratory Services</option>
+                <option value="emergency-services">Emergency Services</option>
+                <option value="telemedicine">Telemedicine</option>
+            </select>
+            <label for="appointment-date">Select Date</label>
+            <input type="date" id="appointment-date" name="appointment-date" required>
+            <label for="appointment-time">Select Time</label>
+            <input type="time" id="appointment-time" name="appointment-time" required>
+            <button type="submit">Book Appointment</button>
+        </form>
+    </div>
+
+    <script>
+        const appointmentForm = document.getElementById('appointment-form');
+        const successAlert = document.getElementById('success-alert');
+ const errorAlert = document.getElementById('error-alert');
+
+        appointmentForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Check if all required fields are filled
+            const isValid = appointmentForm.checkValidity();
+            
+            if (isValid) {
+                // Create an appointment object
+                const newAppointment = {
+                    name: document.getElementById('patient-name').value,
+                    email: document.getElementById('patient-email').value,
+                    phone: document.getElementById('patient-phone').value,
+                    doctor: document.getElementById('doctor').value,
+                    service: document.getElementById('service').value,
+                    date: document.getElementById('appointment-date').value,
+                    time: document.getElementById('appointment-time').value
+                };
+
+                // Store the appointment in local storage
+                let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+                appointments.push(newAppointment);
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+
+                // Show success alert and hide error alert
+                successAlert.style.display = 'block';
+                errorAlert.style.display = 'none';
+
+                // Optionally, redirect to view page after a short delay
+                setTimeout(() => {
+                    window.location.href = 'view.html'; // Redirect to view.html
+                }, 2000);
+            } else {
+                // Show error alert and hide success alert
+                successAlert.style.display = 'none';
+                errorAlert.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
