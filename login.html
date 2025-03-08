@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="w.css">
+    <script>
+        function validateLogin() {
+            // Get the username and password values
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Retrieve user data from local storage
+            var userData = localStorage.getItem(username);
+            if (userData) {
+                var user = JSON.parse(userData);
+                // Check if the password matches
+                if (user.password === password) {
+                    // Redirect to the home page
+                    window.location.href = "include.html"; // Change this to your actual home page path
+                } else {
+                    alert("Invalid password. Please try again.");
+                }
+            } else {
+                alert("Invalid username. Please try again.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form onsubmit="event.preventDefault(); validateLogin();">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        
+        <!-- Create an Account Link -->
+        <p>Don't have an account? <a href="register.html">Create one</a></p>
+    </div>
+</body>
+</html>
