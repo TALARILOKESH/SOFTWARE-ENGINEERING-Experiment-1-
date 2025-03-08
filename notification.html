@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications and Alerts</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .notification-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+        .notification-card h3 {
+            margin: 0;
+            color: #333;
+        }
+        .notification-card p {
+            margin: 5px 0;
+        }
+        .alert {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .alert-info {
+            background-color: #e7f3fe;
+            border-left: 5px solid #2196F3;
+        }
+        .alert-warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffcc00;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            border-left: 5px solid #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Notifications and Alerts</h1>
+
+    <!-- Notifications Section -->
+    <div class="notification-card">
+        <h3>Upcoming Appointment</h3>
+        <p>You have an appointment with Dr. Harshitha (Obstetrics and Gynecology) tomorrow at 10:00 AM.</p>
+    </div>
+
+    <div class="notification-card">
+        <h3>Health Tip of the Day</h3>
+        <p>Drink at least 8 glasses of water every day to stay hydrated!</p>
+    </div>
+
+    <div class="notification-card">
+        <h3>Doctor Availability Update</h3>
+        <p>Dr. Lokesh (Orthopedic Surgery) will be available on weekends from 9:00 AM to 12:00 PM starting next month.</p>
+    </div>
+
+    <div class="notification-card">
+        <h3>Reminder</h3>
+        <p>Your lab results are ready for review. Please contact us to schedule a follow-up appointment.</p>
+    </div>
+
+    <!-- Alert Section -->
+    <div class="alert alert-info">
+        <strong>Info!</strong> Don't forget to schedule your annual health checkup.
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>Warning!</strong> Dr. Raju (Cardiology) will be unavailable for the next two weeks due to a conference.
+    </div>
+
+    <div class="alert alert-success">
+        <strong>Success!</strong> Your appointment has been successfully booked with Dr. Nayum (Pediatrics) for next Tuesday.
+    </div>
+
+    <div class="alert alert-danger">
+        <strong>Alert!</strong> You missed your appointment with Dr. Lokesh (Orthopedic Surgery). Please reschedule.
+    </div>
+
+</body>
+</html>
